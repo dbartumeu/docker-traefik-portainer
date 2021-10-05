@@ -18,13 +18,13 @@ $ cd src/core
 Make sure your server has htpasswd installed. If it doesn’t you can do so with the following command:
 
 ```bash
-$ sudo apt install apache-utils
+sudo apt-get install apache2-utils
 ```
 
 Then run the below command, replacing the `username` and `password` with the one you want to use.
 
 ```bash
-$ echo $(htpasswd -nb <username> <password>)
+echo $(htpasswd -nb <username> <password>)
 ```
 
 Edit the `.env` file and add your auth string to `TRAEFIC_AUTH`. Also replace `ACME_EMAIL`, `TRAEFIC_HOST` and `PORTAINER_HOST` with your own values.
@@ -32,17 +32,17 @@ Edit the `.env` file and add your auth string to `TRAEFIC_AUTH`. Also replace `A
 ### III. Create the proxy network
 
 ```bash
-$ docker network create proxy
+docker network create proxy
 ```
 
 ### IV. Give the proper permissions to acme.json
 
 ```bash
-$ sudo chmod 600 ./traefik-config/acme.json
+sudo chmod 600 ./traefik-data/acme.json
 ```
 
 ### V. Run the stack
 
 ```
-$ sudo docker-compose up -d
+sudo docker-compose up -d
 ```
