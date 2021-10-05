@@ -11,8 +11,7 @@ http:
 
     user-auth:
       basicAuth:
-        users:
-          - "${TRAEFIC_AUTH}"
+        users: '{{ env "TRAEFIC_AUTH" }}'
 
 tls:
   options:
