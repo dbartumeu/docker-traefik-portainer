@@ -29,6 +29,10 @@ echo $(htpasswd -nb <username> <password>)
 
 Edit the `.env` file and add your auth string to `TRAEFIC_AUTH`. Also replace `ACME_EMAIL`, `TRAEFIC_HOST` and `PORTAINER_HOST` with your own values.
 
+```bash
+source .env
+```
+
 ### III. Create the proxy network
 
 ```bash
@@ -45,4 +49,27 @@ sudo chmod 600 ./traefik-data/acme.json
 
 ```
 sudo docker-compose up -d
+```
+
+## Adding services
+
+Using Create stack in portainer copy and paste the dockerfile and make sure to include in the dockerfile:
+
+```yml
+services:
+    ...
+    networks:
+      - proxy
+      - default
+    labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=proxy"
+        - "traefik.http.routers.myservice.entrypoints=websecure"
+        - "traefik.http.routers.myservice.rule=Host(`myservice.yourdomain.com`)"
+        - "traefik.http.routers.myservice.service=myservice"
+        - "traefik.http.services.myservice.loadBalancer.server.port=19999"
+
+networks:
+  proxy:
+    external: true
 ```
