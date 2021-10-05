@@ -12,7 +12,7 @@ http:
     user-auth:
       basicAuth:
         users:
-          - "${TRAEFIC_AUTH}"
+          - "raf:$apr1$MTqfVwiE$FKkzT5ERGFqwH9f3uipxA1"
 
 tls:
   options:
