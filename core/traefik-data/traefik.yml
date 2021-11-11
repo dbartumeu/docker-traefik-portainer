@@ -25,6 +25,16 @@ providers:
     filename: /configurations/dynamic.yml
 
 certificatesResolvers:
+  cloudflare:
+    acme:
+      email: $ACME_EMAIL
+      dnschallenge:
+        provider: cloudflare
+        delaybeforecheck: 0
+        resolvers:
+          - "1.1.1.1:53"
+          - "8.8.8.8:53"
+      caServer:
   letsencrypt:
     acme:
       email: ${ACME_EMAIL}
